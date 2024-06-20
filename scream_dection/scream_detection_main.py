@@ -1,17 +1,26 @@
-import os
+import threading
 import sys
+import os
+
+# 현재 스크립트의 디렉토리 경로를 얻습니다.
+current_dir = os.path.dirname(__file__)
+
+# 모델 파일의 절대 경로를 생성합니다.
+model_dir = os.path.join(current_dir, 'mymodel.pth')
+
+# fall_detection.py 파일이 있는 디렉토리를 sys.path에 추가
+fall_detection_path = os.path.join(current_dir, '../fall_detection')
+sys.path.append(fall_detection_path)
+
 import torch
 import torch.nn as nn
 from PyQt5 import QtCore, QtWidgets
 from demo import MyWindow, MicrophoneRecorder
+from fall_detection import fall_detection  # 낙하 감지 함수 가져오기
 
-def main():
+def scream_detection():
     sampling_rate = 22050  # Hz
     chunk_size = 22050  # samples
-
-    # 현재 스크립트의 디렉토리 경로를 얻습니다.
-    script_dir = os.path.dirname(__file__)
-    model_dir = os.path.join(script_dir, 'mymodel.pth')  # 모델 파일 경로 설정
 
     # 모델 정의
     model = nn.Sequential(
@@ -47,9 +56,6 @@ def main():
         print(f"모델 로딩 중 오류 발생: {e}")
         return
 
-    prediction_i = 0
-    predictions_collection = []
-
     app = QtWidgets.QApplication(sys.argv)
     myWindow = MyWindow(model=model)
     mic = MicrophoneRecorder()
@@ -65,4 +71,12 @@ def main():
     app.exec_()
 
 if __name__ == "__main__":
-    main()
+    # 멀티스레딩을 사용하여 두 프로그램 병렬 실행
+    scream_thread = threading.Thread(target=scream_detection)
+    fall_thread = threading.Thread(target=fall_detection)
+
+    scream_thread.start()
+    fall_thread.start()
+
+    scream_thread.join()
+    fall_thread.join()
