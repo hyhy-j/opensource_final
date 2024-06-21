@@ -18,10 +18,25 @@ from PyQt5 import QtCore, QtWidgets
 from demo import MyWindow, MicrophoneRecorder
 from fall_detection import fall_detection  # 낙하 감지 함수 가져오기
 
-def scream_detection():
+def scream_detection(model):
     sampling_rate = 22050  # Hz
     chunk_size = 22050  # samples
 
+    app = QtWidgets.QApplication(sys.argv)
+    myWindow = MyWindow(model=model)
+    mic = MicrophoneRecorder()
+    mic.signal.connect(myWindow.read_collected)
+
+    # 시간 간격(초) 계산
+    interval = int(1000 * chunk_size / sampling_rate)  # ms 단위로 변경
+    t = QtCore.QTimer()
+    t.timeout.connect(mic.read)
+    t.start(interval)  # 계산된 interval 사용
+
+    myWindow.show()
+    app.exec_()
+
+def main():
     # 모델 정의
     model = nn.Sequential(
         nn.Conv2d(
@@ -56,27 +71,12 @@ def scream_detection():
         print(f"모델 로딩 중 오류 발생: {e}")
         return
 
-    app = QtWidgets.QApplication(sys.argv)
-    myWindow = MyWindow(model=model)
-    mic = MicrophoneRecorder()
-    mic.signal.connect(myWindow.read_collected)
-
-    # 시간 간격(초) 계산
-    interval = int(1000 * chunk_size / sampling_rate)  # ms 단위로 변경
-    t = QtCore.QTimer()
-    t.timeout.connect(mic.read)
-    t.start(interval)  # 계산된 interval 사용
-
-    myWindow.show()
-    app.exec_()
-
-if __name__ == "__main__":
-    # 멀티스레딩을 사용하여 두 프로그램 병렬 실행
-    scream_thread = threading.Thread(target=scream_detection)
+    # 낙하 감지 스레드 시작
     fall_thread = threading.Thread(target=fall_detection)
-
-    scream_thread.start()
     fall_thread.start()
 
-    scream_thread.join()
-    fall_thread.join()
+    # 메인 스레드에서 비명 감지 실행
+    scream_detection(model)
+
+if __name__ == "__main__":
+    main()
