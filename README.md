@@ -85,8 +85,9 @@
 ![image](https://github.com/hyhy-j/opensource_final/assets/141477787/46fe5e55-cdc3-4c20-a89c-79d349adeba1)
 
 ### 최종 결과화면(낙상+비명감지)
-![image](https://github.com/hyhy-j/opensource_final/assets/141477787/8b4022f9-5710-4e48-963d-b8e01ee93158)
-![image](https://github.com/hyhy-j/opensource_final/assets/141477787/1688cf9e-89fc-46dc-9f4a-e616ada516e1)
+![image](https://github.com/hyhy-j/opensource_final/assets/141477787/0ee5f7c4-79b2-4bc3-b23a-642b00a29af4)
+![image](https://github.com/hyhy-j/opensource_final/assets/141477787/44d6c95e-532c-43c0-bf0d-91316651e1f4)
+
 
 
 ## 팀원 역할분담 :
