@@ -9,7 +9,7 @@
    - 사람의 낙상을 감지하고, 감지된 경우 이미지로 저장합니다.
    - 특정 음성을 인식하여 도움 요청을 감지합니다.
 
-2. **비명 감지 (scream_detection_main.py)**:
+2. **비명 감지 (scream_fall_detection_main.py)**:
    - PyTorch를 사용하여 비명 소리를 감지합니다.
    - 사전 훈련된 모델을 사용하여 마이크로 입력된 소리를 분석합니다.
 
@@ -22,7 +22,7 @@
    - 사람의 높이와 너비 비율을 통해 넘어짐을 판단하고, 일정 시간 동안 연속적인 넘어짐이 감지되면 "FALL" 메시지를 출력하고
      해당 프레임을 이미지 파일로 저장합니다.
 
-2. **비명 감지 (scream_detection_main.py)**
+2. **비명 감지 (scream_fall_detection_main.py)**
    - PyQt5를 사용하여 GUI를 구현하고, 마이크 입력을 처리합니다.
    - 신경망 모델은 합성곱 신경망(Convolutional Neural Network)으로 구성되어 소리의 스펙트로그램을 분석하고,
      비명 패턴을 학습한 후 감지합니다.
@@ -59,6 +59,10 @@
 ![image](https://github.com/hyhy-j/opensource_final/assets/141477787/d5feea9c-6d92-49ef-8d3b-a035bef0b843)
 ### 비명감지
 ![image](https://github.com/hyhy-j/opensource_final/assets/141477787/46fe5e55-cdc3-4c20-a89c-79d349adeba1)
+
+### 최종 결과화면(낙상+비명감지)
+![image](https://github.com/hyhy-j/opensource_final/assets/141477787/8b4022f9-5710-4e48-963d-b8e01ee93158)
+![image](https://github.com/hyhy-j/opensource_final/assets/141477787/1688cf9e-89fc-46dc-9f4a-e616ada516e1)
 
 
 ## 팀원 역할분담 :
