@@ -46,7 +46,7 @@
    - PyTorch를 사용하 딥러닝 모델로 통합시킵니다.
    - 읽어온 데이터를 실시작으로 GUI에 반영, 업데이트합니다.
 
-  **비명 감지 - scream_fall_detection_main.py**
+   **비명 감지 - scream_fall_detection_main.py**
    - PyQt5를 사용하여 GUI를 구현하고, 마이크 입력을 처리합니다.
    - 신경망 모델은 합성곱 신경망(Convolutional Neural Network)으로 구성되어 소리의 스펙트로그램을 분석하고,
      비명 패턴을 학습한 후 감지합니다.
